@@ -1,85 +1,43 @@
-import React, { useState } from 'react';
-import { View, Image, TextInput, Button, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Onboarding1 from './screens/Onboarding1';
+import Onboarding2 from './screens/Onboarding2';
+import Home from './screens/Home';
 
-const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+const Stack = createNativeStackNavigator();
 
-  const handleLogin = () => {
-    // Add your login logic here
-    console.log('Login button pressed');
-  };
+export default function App() {
+  const [loading, setLoading] = useState(false);
+  const [firstLaunch, setFirstLaunch] = useState(true);
+
+  useEffect(() => {
+    /*AsyncStorage.getItem('hasLaunched').then(value => {
+      if (value === null) {
+        AsyncStorage.setItem('hasLaunched', 'true');
+        setFirstLaunch(true);
+      } else {
+        setFirstLaunch(false);
+      }
+      
+    });*/
+    setLoading(false);
+  }, []);
+
+  if (loading) return null;
 
   return (
-    <View style={styles.container}>
-      <Image
-        source={require('./logo.png')} // Replace with your logo
-        style={styles.logo}
-      />
-      <Text style={styles.label}>Username or Email:</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Username or Email"
-        value={username}
-        onChangeText={(text) => setUsername(text)}
-      />
-
-      <Text style={styles.label}>Password: </Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        secureTextEntry={true}
-        value={password}
-        onChangeText={(text) => setPassword(text)}
-      />
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Login</Text>
-      </TouchableOpacity>
-      
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        {firstLaunch ? (
+          <>
+            <Stack.Screen name="Onboarding1" component={Onboarding1} />
+            <Stack.Screen name="Onboarding2" component={Onboarding2} />
+          </>
+        ) : null}
+        <Stack.Screen name="Home" component={Home} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-  },
-  logo: {
-    width: 126,
-    height: 92,
-    marginBottom: 20,
-  },
-  label: {
-    fontSize: 16,
-    marginBottom: 5,
-    textAlign: 'left',
-    width: '100%',
-  },
-  input: {
-    width: '100%',
-    height: 40,
-    borderColor: '#DADADA',
-    borderWidth: 1,
-    marginBottom: 20,
-    padding: 10,
-  },
-  button: {
-    backgroundColor: '#5893D4', // 💙 Blue background
-    paddingVertical: 10,
-    paddingHorizontal: 24,
-    borderRadius: 2,
-    width: '100%',
-    textAlign: 'center'
-  },
-  buttonText: {
-    color: '#fff',            // White text
-    fontSize: 14,             // Font size
-    fontWeight: 'bold',
-    textAlign: 'center' 
-  },
-});
-
-export default Login;
+}
