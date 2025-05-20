@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Image, TextInput, Button, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
-const Login = () => {
+const Register = () => {
 
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -83,4 +83,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Login;
+export default Register;
