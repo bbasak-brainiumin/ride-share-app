@@ -7,6 +7,8 @@ import Onboarding2 from './screens/Onboarding2';
 import Home from './screens/Home';
 import Login from './screens/Login';
 import Register from './screens/Register';
+import Profile from './screens/Profile';
+import Notifications from './screens/Notifications';
 
 const Stack = createNativeStackNavigator();
 
@@ -41,6 +43,8 @@ export default function App() {
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Login" component={Login } />
         <Stack.Screen name="Register" component={Register } />
+        <Stack.Screen name="Profile" component={Profile } />
+        <Stack.Screen name="Notifications" component={Notifications } />
       </Stack.Navigator>
     </NavigationContainer>
   );

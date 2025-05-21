@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
-import { View, Image, TextInput, Button, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Image, TextInput, Button, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import Header from '../components/Header';
+import { useNavigation } from '@react-navigation/native';
 
 const Login = () => {
 
+  const navigation = useNavigation();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
@@ -12,6 +16,11 @@ const Login = () => {
   };
 
   return (
+    <SafeAreaView style={{flex: 1}}>
+          <Header title="Login" 
+                   left={<TouchableOpacity onPress={() => navigation.goBack()}><Image source={require('../assets/images/back-icon.png')} /></TouchableOpacity>} 
+                />
+                <ScrollView contentContainerStyle={styles.scrollContent} style={{ flex: 1 }}>
     <View style={styles.container}>
       <Image
         source={require('../logo.png')} // Replace with your logo
@@ -38,6 +47,8 @@ const Login = () => {
       </TouchableOpacity>
       
     </View>
+    </ScrollView>
+    </SafeAreaView>
   );
 };
 

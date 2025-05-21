@@ -1,7 +1,10 @@
 import React from 'react'
 import { Image, Linking, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { useNavigation } from '@react-navigation/native';
 
-export default function Footer({navigation}) {
+
+export default function Footer() {
+    const navigation = useNavigation();
   return (
     <View style={styles.footerMenuWrap}>
         <TouchableOpacity style={styles.footerColumn} onPress={() => Linking.openURL('https://google.com')}>
@@ -16,7 +19,7 @@ export default function Footer({navigation}) {
             <Image source={require('../assets/images/bus-icon.png')} style={styles.footerImg}  />
             <Text style={styles.footerText}>Publish Ride</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.footerColumn} onPress={() => Linking.openURL('https://google.com')}>
+        <TouchableOpacity style={styles.footerColumn} onPress={() => navigation.navigate('Profile')}>
             <Image source={require('../assets/images/user-footer-icon.png')} style={styles.footerImg}  />
             <Text style={styles.footerText}>Account</Text>
         </TouchableOpacity>

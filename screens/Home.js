@@ -3,6 +3,7 @@ import React from 'react';
 import { FlatList, Image, ScrollView, TextInput, TouchableOpacity } from 'react-native';
 import { View, Text, StyleSheet } from 'react-native';
 import Footer from '../components/Footer';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function Home({ navigation }) {
 
@@ -14,6 +15,7 @@ export default function Home({ navigation }) {
 
 
     return (
+         <SafeAreaView style={{flex: 1}}>
         <ScrollView contentContainerStyle={styles.scrollContent} style={{ flex: 1 }}>
             <Image source={require('../assets/images/home-bg-curve.png')} style={styles.backgroundImage} />
             <Text style={styles.searchHeading}>Your pick of rides at low prices</Text>
@@ -114,8 +116,10 @@ export default function Home({ navigation }) {
                     <Text>Register</Text>
                 </TouchableOpacity>
             </View>
-            <Footer />
+            
         </ScrollView>
+        <Footer />
+        </SafeAreaView>
     );
 }
 
