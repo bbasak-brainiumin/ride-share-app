@@ -108,14 +108,7 @@ export default function Home({ navigation }) {
                     </TouchableOpacity>
                 </View>
             </View>
-            <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', width: '100%', marginTop: 20, padding: 20, gap: 20}}>
-                <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-                    <Text>Login</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('Register')}>
-                    <Text>Register</Text>
-                </TouchableOpacity>
-            </View>
+            
             
         </ScrollView>
         <Footer />

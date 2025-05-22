@@ -17,7 +17,7 @@ export default function Notifications() {
           <ScrollView contentContainerStyle={styles.scrollContent} style={{ flex: 1 }}>
         <View style={styles.notificationLists}>
           <Image source={require('../assets/images/notification-icon-2.png')} />
-          <View>
+          <View style={styles.textContainer}>
             <Text style={styles.lightTxt}>Account Name</Text>
             <Text style={styles.boldTxt}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. </Text>
             <Text style={styles.lightTxt}>5s ago</Text>
@@ -27,7 +27,7 @@ export default function Notifications() {
 
         <View style={styles.notificationLists}>
           <Image source={require('../assets/images/notification-icon-2.png')} />
-          <View>
+          <View style={styles.textContainer}>
             <Text style={styles.lightTxt}>Account Name</Text>
             <Text style={styles.boldTxt}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. </Text>
             <Text style={styles.lightTxt}>5s ago</Text>
@@ -37,7 +37,7 @@ export default function Notifications() {
 
         <View style={styles.notificationLists}>
           <Image source={require('../assets/images/notification-icon-2.png')} />
-          <View>
+          <View style={styles.textContainer}>
             <Text style={styles.lightTxt}>Account Name</Text>
             <Text style={styles.boldTxt}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. </Text>
             <Text style={styles.lightTxt}>5s ago</Text>
@@ -75,6 +75,12 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: '#000',
     paddingRight: 25,
-    flex: 1
-  }
+    flex: 1,
+    flexWrap: 'wrap'
+  },
+  textContainer: {
+  flex: 1,
+  flexDirection: 'column',
+  gap: 4,
+}
 })

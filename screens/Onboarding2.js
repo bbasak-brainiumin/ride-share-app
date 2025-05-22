@@ -7,7 +7,13 @@ export default function Onboarding2({ navigation }) {
         <Image source={require('../assets/images/onboarding-img-2.png')} style={styles.logo} />
       <Text style={styles.title}>Where do you want to drive to?</Text>
       <Text style={styles.subtitle}>Let's make this your least expensive journey ever.</Text>
-      <TouchableOpacity style={styles.button} onPress={() => navigation.replace('Home')}>
+      <TouchableOpacity style={styles.button} onPress={() => {
+    // No need to set hasLaunched again — already done
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Login' }],
+    });
+  }}>
         <Text style={styles.buttontext}>Explore Rides Share</Text>
       </TouchableOpacity>
     </View>

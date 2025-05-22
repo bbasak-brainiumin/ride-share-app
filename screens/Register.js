@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { View, Image, TextInput, Button, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { KeyboardAvoidingView, Platform, View, Image, TextInput, Button, Text, StyleSheet, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Header from '../components/Header';
 import { useNavigation } from '@react-navigation/native';
+import { register as registerAPI } from '../api/api';
 
 const Register = () => {
 
@@ -12,72 +13,116 @@ const Register = () => {
   const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [cpassword, setCpassword] = useState('');
+  const [location, setLocation] = useState('');
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     // Add your login logic here
-    console.log('Login button pressed');
+
+    try {
+      const payload = {
+        name: name,
+        email: email,
+        passwordHash: password,
+        phone: phone,
+        phone: phone,
+        location: {
+          type: "Point",
+          coordinates: location.split(",")
+        }
+      };
+      const res = await registerAPI(payload);
+      Alert.alert('Registered Successfully');
+      console.log(res.data, 'test5');
+
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Login' }],
+      });
+
+
+    } catch (err) {
+      console.log(err.response?.data);
+      Alert.alert('Login Failed', err.response?.data?.error || 'Something went wrong');
+    }
   };
 
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <Header title="Registration" 
-               left={<TouchableOpacity onPress={() => navigation.goBack()}><Image source={require('../assets/images/back-icon.png')} /></TouchableOpacity>} 
-            />
-            <ScrollView contentContainerStyle={styles.scrollContent} style={{ flex: 1 }}>
-    <View style={styles.container}>
-
-      <Image
-        source={require('../logo.png')} // Replace with your logo
-        style={styles.logo}
+    <SafeAreaView style={{ flex: 1 }}>
+      <Header title="Registration"
+        left={<TouchableOpacity onPress={() => navigation.goBack()}><Image source={require('../assets/images/back-icon.png')} /></TouchableOpacity>}
       />
-      <Text style={styles.label}>Name</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Name"
-        value={name}
-        onChangeText={(text) => setname(text)}
-      />
+      <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      keyboardVerticalOffset={Platform.OS === 'ios' ? 100 : 0}
+    >
+      <ScrollView contentContainerStyle={styles.scrollContent} style={{ flex: 1 }}>
+        <View style={styles.container}>
 
-      <Text style={styles.label}>Email</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        value={email}
-        onChangeText={(text) => setemail(text)}
-      />
+          <Image
+            source={require('../logo.png')} // Replace with your logo
+            style={styles.logo}
+          />
+          <Text style={styles.label}>Name</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Name"
+            value={name}
+            onChangeText={(text) => setname(text)}
+          />
 
-      <Text style={styles.label}>Phone</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Phone"
-        value={phone}
-        onChangeText={(text) => setPhone(text)}
-      />
+          <Text style={styles.label}>Email</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Email"
+            value={email}
+            onChangeText={(text) => setemail(text)}
+          />
 
-      <Text style={styles.label}>Password: </Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        secureTextEntry={true}
-        value={password}
-        onChangeText={(text) => setPassword(text)}
-      />
+          <Text style={styles.label}>Phone</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Phone"
+            value={phone}
+            onChangeText={(text) => setPhone(text)}
+          />
 
-<Text style={styles.label}>Password: </Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Confirm Password"
-        secureTextEntry={true}
-        value={cpassword}
-        onChangeText={(text) => setCpassword(text)}
-      />
+          <Text style={styles.label}>Password: </Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Password"
+            secureTextEntry={true}
+            value={password}
+            onChangeText={(text) => setPassword(text)}
+          />
 
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Register</Text>
-      </TouchableOpacity>
-      
-    </View>
-    </ScrollView>
+          <Text style={styles.label}>Password: </Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Confirm Password"
+            secureTextEntry={true}
+            value={cpassword}
+            onChangeText={(text) => setCpassword(text)}
+          />
+          <Text style={styles.label}>Location</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Latitude, Longitude"
+            value={location}
+            onChangeText={(text) => setLocation(text)}
+          />
+
+          <TouchableOpacity style={styles.button} onPress={handleLogin}>
+            <Text style={styles.buttonText}>Register</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={{ marginTop: 20 }} onPress={() => navigation.navigate('Login')}>
+            <Text>If you have user. Please Login</Text>
+          </TouchableOpacity>
+
+        </View>
+      </ScrollView>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 };
@@ -120,7 +165,7 @@ const styles = StyleSheet.create({
     color: '#fff',            // White text
     fontSize: 14,             // Font size
     fontWeight: 'bold',
-    textAlign: 'center' 
+    textAlign: 'center'
   },
 });
 
