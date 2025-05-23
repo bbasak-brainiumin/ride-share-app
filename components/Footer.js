@@ -7,11 +7,11 @@ export default function Footer() {
     const navigation = useNavigation();
   return (
     <View style={styles.footerMenuWrap}>
-        <TouchableOpacity style={styles.footerColumn} onPress={() => Linking.openURL('https://google.com')}>
+        <TouchableOpacity style={styles.footerColumn} onPress={() => navigation.navigate('Home')}>
             <Image source={require('../assets/images/home-icon.png')} style={styles.footerImg}  />
             <Text style={styles.footerText}>Home</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.footerColumn} onPress={() => Linking.openURL('https://google.com')}>
+        <TouchableOpacity style={styles.footerColumn} onPress={() => navigation.navigate('Route')}>
             <Image source={require('../assets/images/map-icon.png')} style={styles.footerImg}  />
             <Text style={styles.footerText}>Route</Text>
         </TouchableOpacity>
@@ -28,6 +28,6 @@ export default function Footer() {
 }
 
 const styles = StyleSheet.create({
-    footerMenuWrap: { display: 'flex', flexDirection: 'row', justifyContent: 'space-between',  width: '100%', marginBottom: 0 },
+    footerMenuWrap: { display: 'flex', flexDirection: 'row', justifyContent: 'space-between',  width: '100%', marginBottom: 0, backgroundColor: '#fff' },
     footerColumn: { display: 'flex', flexDirection: 'column', alignItems: 'center', padding: 10 },
 })

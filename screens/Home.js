@@ -15,7 +15,7 @@ export default function Home({ navigation }) {
 
 
     return (
-         <SafeAreaView style={{flex: 1}}>
+         <SafeAreaView style={{flex: 1, backgroundColor: '#EDEDED'}}>
         <ScrollView contentContainerStyle={styles.scrollContent} style={{ flex: 1 }}>
             <Image source={require('../assets/images/home-bg-curve.png')} style={styles.backgroundImage} />
             <Text style={styles.searchHeading}>Your pick of rides at low prices</Text>

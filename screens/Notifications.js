@@ -9,7 +9,7 @@ import { useNavigation } from '@react-navigation/native'
 export default function Notifications() {
   const navigation = useNavigation();
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: '#EDEDED'}}>
           
           <Header title="Notification" 
              left={<TouchableOpacity onPress={() => navigation.goBack()}><Image source={require('../assets/images/back-icon.png')} /></TouchableOpacity>} 

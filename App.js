@@ -11,6 +11,7 @@ import Profile from './screens/Profile';
 import Notifications from './screens/Notifications';
 import { AuthProvider, useAuth } from './api/AuthContext';
 import { View, ActivityIndicator } from 'react-native';
+import Route from './screens/Route';
 
 const Stack = createNativeStackNavigator();
 
@@ -47,6 +48,7 @@ function AppNavigator() {
             <Stack.Screen name="Home" component={Home} />
             <Stack.Screen name="Profile" component={Profile} />
             <Stack.Screen name="Notifications" component={Notifications} />
+            <Stack.Screen name="Route" component={Route} />
           </>
         ) : (
           <>

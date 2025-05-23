@@ -26,10 +26,10 @@ const Login = () => {
       //console.log(res.data?.message, 'test5');
       login(res.data); // Save user globally
 
-      navigation.reset({
+      /*navigation.reset({
         index: 0,
         routes: [{ name: 'Home' }],
-      });
+      });*/
 
 
     } catch (err) {
@@ -39,7 +39,7 @@ const Login = () => {
   };
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
           <Header title="Login" 
                    left={<TouchableOpacity onPress={() => navigation.goBack()}><Image source={require('../assets/images/back-icon.png')} /></TouchableOpacity>} 
                 />
